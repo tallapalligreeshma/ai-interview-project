@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aptitude Basics - Study Notes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --bg-card: #f8fafc;
+            --border: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 40px;
+            max-width: 800px;
+            margin: auto;
+            background: white;
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 4px solid var(--primary);
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-weight: 900;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: -0.025em;
+            margin: 0;
+            color: var(--primary);
+        }
+
+        .header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            page-break-inside: avoid;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid var(--border);
+        }
+
+        .concept-box {
+            margin-bottom: 20px;
+        }
+
+        .concept-title {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tricks {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 16px;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+
+        .trick-item {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .formula {
+            display: inline-block;
+            background: #f1f5f9;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-weight: bold;
+            color: #ef4444;
+        }
+
+        .footer {
+            margin-top: 60px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+            padding-top: 20px;
+        }
+
+        @media print {
+            body { padding: 0; }
+            .no-print { display: none; }
+        }
+
+        .download-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <a href="javascript:window.print()" class="download-btn no-print">Export to PDF</a>
+
+    <div class="header">
+        <h1>Aptitude Basics</h1>
+        <p>Comprehensive Study Notes & Short Tricks</p>
+    </div>
+
+    <div class="section">
+        <div class="section-title">🧠 1. Number System</div>
+        <div class="card">
+            <div class="concept-box">
+                <div class="concept-title">📘 Concepts</div>
+                <ul style="margin: 0; padding-left: 20px;">
+                    <li>Types: Natural, Whole, Integers</li>
+                    <li>Prime & Composite numbers</li>
+                    <li>Factors & Multiples</li>
+                    <li>Divisibility Rules</li>
+                </ul>
+            </div>
+            <div class="tricks">
+                <div class="trick-item">⚡ Short Tricks</div>
+                <ul style="margin: 0; padding-left: 20px; font-size: 0.85rem;">
+                    <li><b>Divisible by 2:</b> Last digit is even</li>
+                    <li><b>Divisible by 3:</b> Sum of digits is divisible by 3</li>
+                    <li><b>Divisible by 9:</b> Sum of digits is divisible by 9</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">📊 2. Simplification</div>
+        <div class="card">
+            <div class="concept-box">
+                <div class="concept-title">📘 Concepts</div>
+                <p>Follow the <b>BODMAS</b> rule: Bracket, Order, Division, Multiplication, Addition, Subtraction.</p>
+                <p><b>Short Trick:</b> Convert fractions to decimals for faster mental solving.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">📈 3. Percentages</div>
+        <div class="card">
+            <div class="concept-box">
+                <div class="concept-title">📌 Formulas</div>
+                <p>% = <span class="formula">(Value / Total) × 100</span></p>
+                <p>Increase % = <span class="formula">[(New - Old) / Old] × 100</span></p>
+            </div>
+            <div class="tricks">
+                <div class="trick-item">⚡ Short Tricks</div>
+                <p style="font-size: 0.85rem; margin: 0;">10% = Div by 10 | 20% = Div by 5 | 25% = Div by 4</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">🔢 4. Ratio & Proportion</div>
+        <div class="card">
+            <p>Relationship between two quantities: <b>a:b = a/b</b></p>
+            <p>If <b>a:b = c:d</b>, then <span class="formula">ad = bc</span> (Cross Multiplication).</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">📊 5. Averages</div>
+        <div class="card">
+            <p>Mean of a set of values.</p>
+            <p><b>Formula:</b> <span class="formula">Sum of values / Number of values</span></p>
+            <p><b>Short Trick:</b> Use the <i>Deviation Method</i> to assume an average and adjust instead of full summation.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">💰 6. Simple Interest (SI)</div>
+        <div class="card">
+            <p>Interest calculated only on the principal amount.</p>
+            <p><b>Formula:</b> <span class="formula">SI = (P × R × T) / 100</span></p>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">💵 7. Compound Interest (CI)</div>
+        <div class="card">
+            <p>Interest calculated on principal and accumulated interest.</p>
+            <p><b>Formula:</b> <span class="formula">CI = P(1 + R/100)^T - P</span></p>
+            <p><b>Short Trick:</b> Use <i>CI ≈ SI + extra interest</i> for 2-year problems.</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Generated by AI Interview Coach Mastery • Confidential Prep Material</p>
+        <p>Copyright © 2026</p>
+    </div>
+</body>
+</html>
