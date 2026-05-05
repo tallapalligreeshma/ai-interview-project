@@ -1,11 +1,8 @@
-import * as React from 'react';
 import { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Breadcrumb from "@/layouts/Breadcrumb";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { Badge } from "@/components/ui/badge";
 import { aptitudeQuestions } from "@/data/aptitudeData";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
@@ -13,11 +10,9 @@ import {
     ChevronRight, 
     ChevronLeft, 
     CheckCircle2, 
-    XCircle, 
     Trophy, 
     Zap, 
     RefreshCw,
-    AlertCircle,
     ArrowLeft
 } from "lucide-react";
 

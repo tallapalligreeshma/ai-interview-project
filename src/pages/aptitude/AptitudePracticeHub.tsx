@@ -1,12 +1,11 @@
 import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
-    Calculator, Brain, MessageSquare, ChevronRight, ArrowLeft, 
-    Zap, Trophy, Sparkles, Filter, Building2, Target, 
-    ArrowRight, CheckCircle2, XCircle, Timer, Bookmark,
+    ChevronRight, 
+    Trophy, CheckCircle2, XCircle, Timer, Bookmark,
     LayoutGrid, ListChecks, BarChart3, Settings2, RefreshCw,
-    Plus, Lightbulb, BookOpen, Share2, Star, Quote, HelpCircle,
-    Hash, Type, AlertCircle, Flame
+    Plus, Lightbulb, Star, 
+    AlertCircle, Flame, Sparkles, ArrowRight
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";

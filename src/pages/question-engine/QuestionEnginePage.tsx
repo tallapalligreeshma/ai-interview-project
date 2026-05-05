@@ -5,10 +5,7 @@ import {
     Filter, 
     Code2, 
     ChevronRight, 
-    Sparkles, 
-    Zap, 
     Brain,
-    MessageSquare,
     BookOpen,
     Terminal
 } from "lucide-react";

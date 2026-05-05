@@ -4,9 +4,7 @@ import {
     ShieldAlert,
     TrendingUp,
     Zap,
-    BookOpen,
     ArrowRight,
-    RefreshCw,
     Activity,
     ChevronRight,
     Brain,
@@ -16,7 +14,7 @@ import {
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ReactApexChart from "react-apexcharts";
-import type { ApexOptions } from "apexcharts";
+
 
 const WeaknessTrackerPage = () => {
     const navigate = useNavigate();
@@ -48,7 +46,7 @@ const WeaknessTrackerPage = () => {
             bg: "bg-[#F59E0B]/10",
             border: "border-[#F59E0B]/20",
             barColor: "bg-[#F59E0B]",
-            tip: "Master memoization patterns. Start with Fibonacci, then move to Knapsack problem and Longest Common Subsequence.",
+            tip: "Master memoization patterns. Start with Fibonacci, then move to Knapsack problem and Longest Common Sequence.",
             relatedTopics: ["Memoization", "Backtracking", "Tree DP", "Knapsack"]
         },
         {
@@ -81,7 +79,7 @@ const WeaknessTrackerPage = () => {
         }
     ];
 
-    const radarOptions: ApexOptions = {
+    const radarOptions: any = {
         chart: { type: "radar", toolbar: { show: false }, background: "transparent" },
         colors: ["#EF4444"],
         stroke: { width: 2, colors: ["#EF4444"] },
@@ -100,7 +98,7 @@ const WeaknessTrackerPage = () => {
 
     const radarSeries = [{ name: "Weak Zones", data: [52, 58, 65, 70, 45, 60] }];
 
-    const barOptions: ApexOptions = {
+    const barOptions: any = {
         chart: { type: "bar", toolbar: { show: false }, background: "transparent" },
         colors: ["#6366F1", "#22D3EE", "#F59E0B", "#EF4444"],
         xaxis: {
@@ -114,7 +112,7 @@ const WeaknessTrackerPage = () => {
         plotOptions: { bar: { borderRadius: 8, distributed: true } },
         legend: { show: false },
         theme: { mode: "dark" },
-        tooltip: { theme: "dark", y: { formatter: (val) => `${val}% Mastery` } }
+        tooltip: { theme: "dark", y: { formatter: (val: number) => `${val}% Mastery` } }
     };
 
     const barSeries = [{ name: "Mastery", data: [52, 58, 65, 70] }];

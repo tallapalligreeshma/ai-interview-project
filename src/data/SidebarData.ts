@@ -4,7 +4,9 @@ import {
   Video,
   BrainCircuit,
   LineChart,
-  Target
+  Target,
+  Clock,
+  LogOut
 } from "lucide-react";
 
 export const data = {
@@ -26,8 +28,8 @@ export const data = {
       icon: Video,
     },
     {
-      title: "AI Coach",
-      url: "/ai-assistant",
+      title: "Practice Hub",
+      url: "/practice",
       icon: BrainCircuit,
     },
     {
@@ -36,9 +38,19 @@ export const data = {
       icon: LineChart,
     },
     {
+      title: "Simulation History",
+      url: "/history",
+      icon: Clock,
+    },
+    {
       title: "Weakness Tracker",
       url: "/weakness-tracker",
       icon: Target,
+    },
+    {
+      title: "Logout System",
+      url: "/auth/login",
+      icon: LogOut,
     }
   ],
 };

@@ -1,10 +1,9 @@
-import * as React from 'react';
 import { useState } from 'react';
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import type { AptitudeQuestion } from "@/data/aptitudeData";
-import { ChevronDown, ChevronUp, Eye, Zap, MessageSquare, Target } from "lucide-react";
+import { ChevronUp, Eye, Zap, Target } from "lucide-react";
 import { AnswerAccordion } from "./AnswerAccordion";
 import { cn } from "@/lib/utils";
 

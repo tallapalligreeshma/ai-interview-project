@@ -1,13 +1,9 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
-    Send, Bot, Target, Zap, Activity, Brain, CheckCircle2, ChevronRight, 
-    ListTodo, Clock, Sparkles, AlertTriangle, Route
+    Send, Target, Zap, Brain, CheckCircle2, 
+    ListTodo, Clock, AlertTriangle, Route
 } from "lucide-react";
-
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 
 interface Message {
     id: string;

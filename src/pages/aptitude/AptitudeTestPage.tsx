@@ -1,17 +1,12 @@
-import * as React from 'react';
 import { useState, useEffect, useMemo } from 'react';
-import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import Breadcrumb from "@/layouts/Breadcrumb";
+import { useParams, useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
+import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { aptitudeQuestions } from "@/data/aptitudeData";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
     Timer, 
-    ChevronRight, 
-    ChevronLeft, 
     CheckCircle2, 
     XCircle, 
     Trophy, 
@@ -29,7 +24,6 @@ import {
     Share2,
     ChevronDown,
     ChevronUp,
-    Activity,
     Cpu,
     Sparkles
 } from "lucide-react";
@@ -39,11 +33,6 @@ import { cn } from "@/lib/utils";
 export default function AptitudeTestPage() {
     const { id } = useParams();
     const navigate = useNavigate();
-    const location = useLocation();
-    
-    // Determine test mode
-    const searchParams = new URLSearchParams(location.search);
-    const mode = searchParams.get('mode') || 'Practice';
     
     const questions = useMemo(() => {
         if (id) {

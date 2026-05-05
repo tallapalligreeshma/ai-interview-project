@@ -1,5 +1,5 @@
 import { Card } from "@/components/ui/card";
-import { Award, CheckCircle, Flame, Mic, XCircle, ArrowRight, Brain, Target, Zap } from "lucide-react";
+import { Award, CheckCircle, Flame, Mic } from "lucide-react";
 import React from "react";
 import {
   Dialog,
@@ -8,7 +8,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
+
 
 interface CardData {
   title: string;

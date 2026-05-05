@@ -38,7 +38,7 @@ function App() {
   console.log("App Rendering...");
   return (
     <ErrorBoundary>
-      <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
+      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <LoadingProvider>
         <IsSubmittingContextProvider>
           <EmailSidebarProvider>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
     BookOpen, 
@@ -24,7 +24,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const PracticePage = () => {
     const location = useLocation();
-    const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState("theory");
     const [searchQuery, setSearchQuery] = useState("");
     const [aiQuestions, setAiQuestions] = useState<any[]>([]);

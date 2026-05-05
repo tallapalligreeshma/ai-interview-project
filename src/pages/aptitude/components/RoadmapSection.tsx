@@ -1,13 +1,10 @@
-import * as React from 'react';
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+
 import { roadmapSteps } from "@/data/aptitudeData";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { 
     CheckCircle2, 
     Circle, 
-    ArrowRight, 
     Target, 
     Zap, 
     Trophy,

@@ -5,21 +5,18 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { 
     Code2, 
-    Monitor, 
     MessageSquare, 
     ChevronRight, 
     Zap, 
     Sparkles, 
     CheckCircle2, 
     ArrowLeft,
-    Brain,
     Target,
     BookOpen,
     Layers,
     Cpu,
     Users,
-    Activity,
-    Calculator
+    Activity
 } from "lucide-react";
 import { motion } from "framer-motion";
 

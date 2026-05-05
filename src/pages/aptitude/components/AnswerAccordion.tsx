@@ -1,7 +1,7 @@
-import * as React from 'react';
+
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle2, Zap, Brain, Sparkles } from "lucide-react";
-import { cn } from "@/lib/utils";
+
 
 interface AnswerAccordionProps {
     isOpen: boolean;

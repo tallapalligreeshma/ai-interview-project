@@ -1,11 +1,10 @@
-import * as React from 'react';
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import type { AptitudeTopic } from "@/data/aptitudeData";
-import { Play, BookOpen, Clock, ChevronRight, Zap } from "lucide-react";
+import { BookOpen, Clock, Zap } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
+
 import { cn } from "@/lib/utils";
 
 export function TopicCard({ topic }: { topic: AptitudeTopic }) {

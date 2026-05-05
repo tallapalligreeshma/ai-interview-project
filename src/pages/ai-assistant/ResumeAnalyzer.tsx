@@ -3,35 +3,25 @@ import { motion, AnimatePresence } from "framer-motion";
 import { 
     FileText, 
     Sparkles, 
-    AlertCircle, 
-    CheckCircle2, 
-    BookOpen, 
-    RefreshCcw, 
+    Briefcase,
+    Crown,
+    UserCircle2,
+    UserCheck,
+    Activity,
+    RefreshCw,
     ArrowRight,
     Brain,
     Target,
-    ShieldCheck,
-    History,
-    TrendingUp,
-    Star,
-    XCircle,
-    UserCircle2,
-    Zap,
-    Briefcase,
-    Crown,
-    UserCheck,
-    ShieldAlert,
     Cpu,
-    Shield,
-    ChevronRight,
-    Activity,
-    LineChart
+    LineChart,
+    Star,
+    ShieldAlert,
+    Zap
 } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
 import Breadcrumb from "@/layouts/Breadcrumb";
 import { resumeAnalysisService } from "@/lib/ResumeAnalysisService";
 import type { ResumeAnalysisReport } from "@/lib/ResumeAnalysisService";
@@ -207,7 +197,7 @@ const ResumeAnalyzer = () => {
                                                 title="Upload PDF Resume"
                                             />
                                             <Button variant="ghost" disabled={isParsingPdf} className="h-14 px-8 rounded-2xl bg-white/[0.03] border border-white/5 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 group-hover/upload:text-white group-hover/upload:border-[#6366F1]/30 smooth-transition italic">
-                                                {isParsingPdf ? <RefreshCcw size={16} className="animate-spin mr-3"/> : <Sparkles size={16} className="mr-3"/>} Inject PDF
+                                                {isParsingPdf ? <RefreshCw size={16} className="animate-spin mr-3"/> : <Sparkles size={16} className="mr-3"/>} Inject PDF
                                             </Button>
                                         </div>
                                     </div>
@@ -296,7 +286,7 @@ const ResumeAnalyzer = () => {
                                     <div className="absolute top-0 right-0 p-10 opacity-[0.02] pointer-events-none"><Activity size={150} /></div>
                                     <div className="flex items-center gap-8 relative z-10">
                                          <Button onClick={resetAnalysis} variant="ghost" className="h-16 w-16 rounded-2xl flex items-center justify-center border border-white/10 bg-white/5 hover:bg-white/10 smooth-transition">
-                                            <RefreshCcw size={24} className="text-slate-400" />
+                                            <RefreshCw size={24} className="text-slate-400" />
                                          </Button>
                                          <div className="space-y-1">
                                             <h2 className="text-3xl font-black text-white italic uppercase tracking-tighter leading-none">Extraction Assessment</h2>

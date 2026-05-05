@@ -12,7 +12,6 @@ import {
     UserCircle2,
     Eye,
     Maximize2,
-    Monitor,
     Sparkles,
     ShieldAlert,
     Brain,
@@ -37,7 +36,7 @@ const VideoInterviewPage = () => {
     const [isAnalyzing, setIsAnalyzing] = useState(false);
     const [feedback, setFeedback] = useState<any>(null);
     const [currentQuestion, setCurrentQuestion] = useState("Initializing neural link...");
-    const [isLoading, setIsLoading] = useState(false);
+
     const [timer, setTimer] = useState(0);
 
     // 9.8 Upgrade States
@@ -84,7 +83,7 @@ const VideoInterviewPage = () => {
     };
 
     const fetchRoleQuestion = async () => {
-        setIsLoading(true);
+
         try {
             const data = await aiService.generateModuleResponse("technical_mock", {
                 role: selectedRole?.title,
@@ -95,7 +94,7 @@ const VideoInterviewPage = () => {
             console.error(err);
             setCurrentQuestion(`Explain your experience with ${selectedRole?.title}.`);
         } finally {
-            setIsLoading(false);
+
         }
     };
 

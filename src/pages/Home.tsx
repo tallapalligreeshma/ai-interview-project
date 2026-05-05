@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Brain, Mic, Zap, CheckCircle2, Star, Shield, Trophy, Cpu } from "lucide-react";
-import { aiService } from "@/lib/AiService";
+import { ArrowRight, Brain, Mic, Zap, CheckCircle2, Shield, Trophy, Cpu } from "lucide-react";
+
 
 const Home = () => {
     const navigate = useNavigate();
@@ -50,6 +50,9 @@ const Home = () => {
                             className="space-y-6"
                         >
                             <div className="space-y-4">
+                                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-primary/10 border border-primary/20 text-primary font-black text-[10px] uppercase tracking-[0.2em] mb-4">
+                                    <Cpu size={14} className="animate-pulse" /> IntelliHire AI: Adaptive Interview Intelligence System
+                                </div>
                                 <h1 className="text-[52px] md:text-[80px] lg:text-[100px] font-[1000] tracking-[-0.04em] leading-[0.9] text-slate-950 dark:text-white">
                                     Stop Guessing. <span className="block md:inline-block md:mt-2 bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent italic font-[900]">Start Practicing Real Interviews.</span>
                                 </h1>
@@ -68,9 +71,12 @@ const Home = () => {
                         >
                             <Button 
                                 onClick={() => navigate('/interview')}
-                                className="h-16 px-12 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-black uppercase tracking-[0.1em] shadow-xl shadow-blue-500/30 transition-all hover:scale-[1.03] active:scale-95 text-xs"
+                                className="h-16 px-12 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-black uppercase tracking-[0.1em] shadow-[0_0_20px_rgba(37,99,235,0.4)] hover:shadow-[0_0_40px_rgba(37,99,235,0.6)] transition-all hover:scale-[1.05] active:scale-95 text-xs group relative overflow-hidden"
                             >
-                                Start Mock Interview <ArrowRight size={18} className="ml-2" />
+                                <span className="relative z-10 flex items-center">
+                                    Start Mock Interview <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
+                                </span>
+                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-shimmer" />
                             </Button>
                             <button
                                 onClick={() => navigate('/practice')}

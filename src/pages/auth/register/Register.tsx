@@ -1,13 +1,13 @@
 // Elite AI Hero image
 const AuthImage = "/assets/auth-hero.png";
 
-import ThemeLogo from "@/components/shared/ThemeLogo";
+
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { useIsSubmitting } from "@/context/isSubmittingContext";
 import { authAPI } from "@/services/api";
-import { BrainCircuit, Eye, EyeOff, Loader2, Lock, Mail, User } from 'lucide-react';
+import { BrainCircuit, Eye, EyeOff, Loader2, Lock, Mail } from 'lucide-react';
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';

@@ -1,10 +1,9 @@
-import React, { useState, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { 
     ChevronLeft, 
     Rocket, 
-    BookOpen, 
     MessageSquare, 
     Laptop, 
     CheckCircle2,

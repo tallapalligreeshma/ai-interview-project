@@ -2,7 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { Layout, Server, Database, ArrowRight, Code, ShieldCheck } from "lucide-react";
+import { Layout, Server, ArrowRight, ShieldCheck } from "lucide-react";
 
 const roles = [
   {

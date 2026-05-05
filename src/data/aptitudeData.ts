@@ -11,7 +11,6 @@ import {
     Layers,
     PieChart,
     BarChart3,
-    Clock,
     TrendingUp,
     Percent,
     Hash,
@@ -243,5 +242,3 @@ export const preparationTips = [
     { id: 3, text: 'Visualize DI problems using charts before calculating.' },
     { id: 4, text: 'Practice 20-20-20 rule: 20 questions in 20 mins every day.' }
 ];
-
-export type { AptitudeTopic, AptitudeQuestion, RoadmapStep };

@@ -1,7 +1,7 @@
-import * as React from 'react';
+
 import { Button } from "@/components/ui/button";
-import { Timer, Zap, Map, Target, Sparkles } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Timer, Zap, Map, Sparkles } from "lucide-react";
+
 
 export default function AptitudeHeader() {
   return (

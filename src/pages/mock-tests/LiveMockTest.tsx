@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
-    Zap, 
     Timer, 
     ChevronRight, 
     CheckCircle2, 
-    XCircle, 
     ArrowRight, 
     BookOpen, 
     Code, 
@@ -13,10 +11,9 @@ import {
     RefreshCw,
     Award
 } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
 import { aiService } from "@/lib/AiService";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";

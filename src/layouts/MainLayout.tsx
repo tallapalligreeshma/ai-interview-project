@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { Loader2 } from 'lucide-react';
 import Footer from './Footer';
 import Header from './Header';
@@ -7,11 +7,6 @@ import SidebarLayout from './SidebarLayout';
 
 
 const MainLayout = () => {
-    const location = useLocation();
-    const isDashboard = location.pathname === '/dashboard' || location.pathname === '/';
-
-    const isAiDashboard = location.pathname === '/ai-interview-dashboard';
-
     return (
         <SidebarLayout>
             <div className="flex flex-col min-h-full relative font-sans overflow-hidden dark bg-[#0B0F1A] text-white">

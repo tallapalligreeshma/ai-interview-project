@@ -24,6 +24,7 @@ import {
     Cloud, 
     ArrowRight
 } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface Role2026 {
     id: string;

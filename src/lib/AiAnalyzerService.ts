@@ -76,9 +76,9 @@ Analytical, Honest, Direct. Avoid basic questions. Focus on depth.
         }
     }
 
-    private getMockAnalysis(resume: string, jd: string): AnalysisResponse {
+    private getMockAnalysis(_resume: string, _jd: string): AnalysisResponse {
         // Simplified mock logic based on keywords
-        const isJunior = resume.toLowerCase().includes("fresher") || resume.toLowerCase().includes("intern");
+        const isJunior = _resume.toLowerCase().includes("fresher") || _resume.toLowerCase().includes("intern");
         
         return {
             summary: {

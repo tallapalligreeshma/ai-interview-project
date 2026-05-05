@@ -9,7 +9,6 @@ import {
     Award,
     Activity,
     Cpu,
-    ArrowRight,
     Sparkles,
     Shield,
     Monitor

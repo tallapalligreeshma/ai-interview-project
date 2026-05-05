@@ -1,8 +1,9 @@
 import React, { lazy } from "react";
-import { createBrowserRouter, useNavigate, Navigate } from "react-router-dom";
+import { createBrowserRouter, useNavigate } from "react-router-dom";
 
+import Login from "@/pages/auth/login/Login";
 const ForgotPassword = lazy(() => import("@/pages/auth/forgot-password/ForgotPassword"));
-const Login = lazy(() => import("@/pages/auth/login/Login"));
+// const Login = lazy(() => import("@/pages/auth/login/Login"));
 const Register = lazy(() => import("@/pages/auth/register/Register"));
 const Calendar = lazy(() => import("@/pages/calendar/Calendar"));
 const CodingPage = lazy(() => import("@/pages/coding/CodingPage"));
@@ -18,7 +19,6 @@ import GuestRoutes from "./GuestRoutes";
 import ProtectedRoutes from "./ProtectedRoutes";
 
 const Home = lazy(() => import("../pages/Home"));
-const AiDashboard = lazy(() => import("../pages/dashboards/dashboard/AiDashboard"));
 const JobRoles = lazy(() => import("../pages/job-roles/JobRoles"));
 const RoleDetails = lazy(() => import("../pages/job-roles/RoleDetails"));
 const AiPrepDashboard = lazy(() => import("../pages/dashboards/dashboard/AiPrepDashboard"));
@@ -50,7 +50,7 @@ const WeaknessTrackerPage = lazy(() => import("../pages/weakness/WeaknessTracker
 const DemoAutologin = () => {
     const navigate = useNavigate();
     React.useEffect(() => {
-        const mockUser = { username: "Guest Hunter", email: "demo@ai-coach.com" };
+        const mockUser = { username: "Greeshma", email: "demo@ai-coach.com" };
         localStorage.setItem('token', 'mock_token_for_demo');
         localStorage.setItem('user', JSON.stringify(mockUser));
         navigate("/ai-interview-dashboard", { replace: true });
@@ -98,7 +98,7 @@ export const router = createBrowserRouter([
             element: <DemoAutologin />
           },
           {
-            path: "/ai-interview-dashboard", element: <AiDashboard />
+            path: "/ai-interview-dashboard", element: <AiPrepDashboard />
           },
           {
             path: "/ai-prep", element: <AiPrepDashboard />

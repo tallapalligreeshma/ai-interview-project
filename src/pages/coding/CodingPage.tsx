@@ -1,4 +1,4 @@
-import Breadcrumb from "@/layouts/Breadcrumb";
+
 import { 
     Play, 
     Send, 
@@ -9,11 +9,9 @@ import {
     AlertTriangle, 
     RefreshCw,
     Terminal,
-    Cpu,
     Activity,
     Zap,
-    Sparkles,
-    Layout
+    Sparkles
 } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -237,7 +235,6 @@ const CodingPage = () => {
                                     automaticLayout: true,
                                     padding: { top: 30, bottom: 30 },
                                     wordWrap: "on",
-                                    backgroundColor: 'transparent',
                                     renderLineHighlight: 'all',
                                     cursorStyle: 'block'
                                 }}

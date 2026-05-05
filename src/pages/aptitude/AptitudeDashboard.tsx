@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Breadcrumb from "@/layouts/Breadcrumb";
@@ -16,16 +15,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import { 
     Search,
     ChevronDown,
-    Filter,
     Trophy,
     CheckCircle2,
-    MessageSquare,
     Zap,
     Target,
     Activity,
     Brain,
-    Sparkles,
-    ChevronRight
+    ChevronRight,
+    Sparkles
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -35,13 +32,12 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { cn } from "@/lib/utils";
 
 export default function AptitudeDashboard() {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [companyFilter, setCompanyFilter] = useState("All Companies");
-  const [difficultyFilter, setDifficultyFilter] = useState("All Difficulties");
+  const [difficultyFilter] = useState("All Difficulties");
 
   // Get unique companies for filter
   const allCompanies = useMemo(() => {

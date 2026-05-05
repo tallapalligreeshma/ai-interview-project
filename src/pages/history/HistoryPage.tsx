@@ -1,7 +1,7 @@
 import { 
     History, Filter, Download, 
     ChevronRight, Zap, Code2, Layout, 
-    Shield, BarChart, Search,
+    Shield, BarChart,
     Sparkles,
     Target,
     Activity,

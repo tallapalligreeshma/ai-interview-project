@@ -1,4 +1,4 @@
-import { AnalysisResponse } from "./AiAnalyzerService";
+
 
 export interface ResumeData {
   text?: string;

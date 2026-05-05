@@ -1,30 +1,24 @@
 import * as React from 'react';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Breadcrumb from "@/layouts/Breadcrumb";
-import { Card, CardFooter } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
+import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { 
-    Search, 
     Briefcase,
-    Star,
     ChevronRight,
-    Trophy,
     Sparkles,
     Zap,
     RefreshCw
 } from "lucide-react";
 import { aiService } from "@/lib/AiService";
 import { rolesData } from "@/data/rolesData";
-import type { Role } from "@/data/rolesData";
 
 export default function JobRoles({ isEmbedded = false }: { isEmbedded?: boolean }) {
     const navigate = useNavigate();
-    const [searchQuery, setSearchQuery] = useState("");
-    const [activeCategory, setActiveCategory] = useState<string>("All");
+
     const [aiRoles, setAiRoles] = useState<any[]>([]);
     const [isGenerating, setIsGenerating] = useState(false);
     
@@ -40,56 +34,9 @@ export default function JobRoles({ isEmbedded = false }: { isEmbedded?: boolean 
         }
     };
     
-    // Safety check for rolesData
-    const safeRolesData = useMemo(() => rolesData || [], []);
 
-    // Load bookmarks (mocking for now with some IDs if none exist)
-    const [bookmarkedIds, setBookmarkedIds] = useState<string[]>(() => {
-        if (typeof window !== 'undefined') {
-            try {
-                const saved = localStorage.getItem("bookmarkedRoles");
-                return saved ? JSON.parse(saved) : ['1', '2', '5', '15'];
-            } catch (e) {
-                return ['1', '2', '5', '15'];
-            }
-        }
-        return [];
-    });
 
-    const toggleBookmark = (e: React.MouseEvent, id: string) => {
-        e.stopPropagation();
-        setBookmarkedIds(prev => {
-            const next = prev.includes(id) ? prev.filter(bId => bId !== id) : [...prev, id];
-            localStorage.setItem("bookmarkedRoles", JSON.stringify(next));
-            return next;
-        });
-    };
 
-    const handleViewDetails = (role: Role) => {
-        if (role?.id) navigate(`/roles/${role.id}`);
-    };
-
-    // Filter roles
-    const filteredRoles = useMemo(() => {
-        return safeRolesData.filter(role => {
-            const matchesSearch = role.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                                   role.description.toLowerCase().includes(searchQuery.toLowerCase());
-            
-            let matchesCategory = true;
-            if (activeCategory === "IT Roles") matchesCategory = role.category === "Tech";
-            else if (activeCategory === "Non-IT Roles") matchesCategory = role.category === "Non-Tech";
-            else if (activeCategory === "Bookmarked") matchesCategory = bookmarkedIds.includes(role.id);
-            
-            return matchesSearch && matchesCategory;
-        });
-    }, [searchQuery, activeCategory, bookmarkedIds, safeRolesData]);
-
-    const categories = [
-        { id: "All", label: "All Roles" },
-        { id: "IT Roles", label: "IT & Tech" },
-        { id: "Non-IT Roles", label: "Non-IT Roles" },
-        { id: "Bookmarked", label: "Saved", icon: Star }
-    ];
 
     return (
         <div className={`flex flex-col ${isEmbedded ? '' : 'min-h-screen bg-neutral-50 dark:bg-[#0B0F1A]'}`}>
@@ -115,7 +62,7 @@ export default function JobRoles({ isEmbedded = false }: { isEmbedded?: boolean 
 
                     {/* Roles Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 pb-20">
-                        {filteredRoles.map((role) => (
+                        {rolesData.map((role) => (
                             <Card 
                                 key={role.id}
                                 onClick={() => navigate(`/interview/${role.title.toLowerCase().replace(/\s+/g, '-')}`)}

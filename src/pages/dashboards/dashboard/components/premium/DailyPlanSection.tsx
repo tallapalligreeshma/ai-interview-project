@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion } from "framer-motion";
-import { CheckCircle2, Circle, Clock, ChevronDown, Rocket, Code2, Monitor, MessageSquare, Zap } from "lucide-react";
+import { CheckCircle2, Circle, ChevronDown, Rocket } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 
 interface Task {
@@ -22,20 +22,13 @@ const initialTasks: Task[] = [
 
 const DailyPlanSection = () => {
     const [tasks] = useState<Task[]>(initialTasks);
-    const [role, setRole] = useState("Software Developer");
+    const [role] = useState("Software Developer");
 
     const completedTasks = tasks.filter(t => t.status === 'completed').length;
     const totalTime = tasks.reduce((acc, t) => acc + t.duration, 0) / 60;
     const completedTime = tasks.reduce((acc, t) => acc + t.completed, 0) / 60;
 
-    const getIcon = (category: string) => {
-        switch(category) {
-            case 'DSA': return <Code2 size={16} />;
-            case 'SYSTEM DESIGN': return <Monitor size={16} />;
-            case 'BEHAVIORAL': return <MessageSquare size={16} />;
-            default: return <Zap size={16} />;
-        }
-    }
+
 
     return (
         <div className="flex flex-col h-full space-y-8">

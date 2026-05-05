@@ -1,11 +1,11 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mic, StopCircle, Volume2, ArrowRight, Activity, Zap, ShieldCheck } from "lucide-react";
+import { Mic, StopCircle, Volume2, ArrowRight, Activity, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+
 import { Badge } from "@/components/ui/badge";
 import { useNavigate, useLocation } from "react-router-dom";
-import { interviewAPI } from "@/services/api";
+
 import { aiService } from "@/lib/AiService";
 import { toast } from "react-toastify";
 

@@ -1,6 +1,5 @@
-import React from 'react';
 import { motion } from "framer-motion";
-import { Flame, Clock, Brain, TrendingUp, Sparkles, LogOut } from "lucide-react";
+import { Flame, Clock, Brain, TrendingUp, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const AnalyticsAISection = () => {

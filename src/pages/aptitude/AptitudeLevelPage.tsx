@@ -12,14 +12,13 @@ import {
     aptitudeQuestions, 
     roadmapSteps 
 } from "@/data/aptitudeData";
-import { motion } from "framer-motion";
 import { 
     ChevronLeft, 
-    BookOpen, 
     Zap, 
+    BookOpen,
+    Loader2,
     Target,
-    HelpCircle,
-    Loader2
+    HelpCircle
 } from "lucide-react";
 import { AptitudeBasicsNotesTemplate } from "./components/AptitudeBasicsNotesTemplate";
 // @ts-ignore
@@ -135,9 +134,9 @@ export default function AptitudeLevelPage() {
             const opt = {
                 margin: 0.5,
                 filename: `Aptitude_${level}_Notes.pdf`,
-                image: { type: 'jpeg', quality: 0.98 },
+                image: { type: 'jpeg', quality: 0.98 } as const,
                 html2canvas: { scale: 2, useCORS: true, logging: false },
-                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' as any }
             };
 
             await html2pdf().set(opt).from(element).save();
@@ -149,17 +148,21 @@ export default function AptitudeLevelPage() {
     };
 
     const levelData = useMemo(() => {
-        const normalizedLevel = level?.charAt(0).toUpperCase() + level?.slice(1).toLowerCase();
+        const normalizedLevel = level?.charAt(0).toUpperCase() + (level?.slice(1).toLowerCase() || "");
         return roadmapSteps.find(s => s.title === normalizedLevel || s.level === normalizedLevel);
     }, [level]);
 
     const filteredTopics = useMemo(() => {
-        const normalizedLevel = level?.charAt(0).toUpperCase() + level?.slice(1).toLowerCase();
-        return aptitudeTopics.filter(t => t.level === normalizedLevel);
+        const normalizedLevel = level?.toLowerCase();
+        let targetDifficulty: 'Easy' | 'Medium' | 'Hard' = 'Easy';
+        if (normalizedLevel === 'intermediate') targetDifficulty = 'Medium';
+        else if (normalizedLevel === 'advanced') targetDifficulty = 'Hard';
+        
+        return aptitudeTopics.filter(t => t.difficulty === targetDifficulty);
     }, [level]);
 
     const filteredQuestions = useMemo(() => {
-        const normalizedLevel = level?.charAt(0).toUpperCase() + level?.slice(1).toLowerCase();
+        const normalizedLevel = level?.charAt(0).toUpperCase() + (level?.slice(1).toLowerCase() || "");
         return aptitudeQuestions.filter(q => q.level === normalizedLevel);
     }, [level]);
 

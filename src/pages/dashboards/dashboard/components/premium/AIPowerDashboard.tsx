@@ -1,5 +1,4 @@
-import React from 'react';
-import { motion } from "framer-motion";
+
 import DailyPlanSection from "./DailyPlanSection";
 import FocusSummarySection from "./FocusSummarySection";
 import AnalyticsAISection from "./AnalyticsAISection";

@@ -29,13 +29,13 @@ export function AppSidebar() {
                             "text-base font-black tracking-tight leading-tight",
                             isAiDashboard ? "text-white" : "text-neutral-800 dark:text-white"
                         )}>
-                            AI Interview Coach
+                            IntelliHire AI
                         </h1>
                         <p className={cn(
                             "text-[9px] uppercase font-black tracking-[0.05em] leading-tight mt-0.5",
                             isAiDashboard ? "text-[#9CA3AF]" : "text-neutral-400 dark:text-slate-500"
                         )}>
-                            Get Hired Faster with AI Mock Interviews
+                            Adaptive Interview Intelligence System
                         </p>
                     </div>
                 </Link>

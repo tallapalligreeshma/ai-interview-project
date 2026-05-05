@@ -1,15 +1,11 @@
 import { motion } from "framer-motion";
 import { 
     UserCircle2, 
-    Zap, 
     Sparkles, 
-    ShieldAlert, 
-    MessageSquare, 
     Flame, 
     Smile, 
     BrainCircuit,
-    ArrowRight,
-    ChevronRight
+    ArrowRight
 } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Bot, X, MessageSquare, Sparkles, Activity, Zap, Cpu, Send } from "lucide-react";
+import { Bot, X, Sparkles, Activity, Zap, Cpu, Send } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { cn } from "@/lib/utils";
+
 
 const AiCoachWidget = () => {
     const [isOpen, setIsOpen] = useState(false);

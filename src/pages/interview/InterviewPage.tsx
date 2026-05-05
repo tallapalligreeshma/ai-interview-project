@@ -1,17 +1,17 @@
 import { 
-    Mic, StopCircle, RefreshCw, Sparkles, ArrowLeft, ArrowRight, BookOpen, Brain, 
-    Zap, Monitor, AlertCircle, MessageSquare, Code2, Timer, CheckCircle2, ShieldAlert, FileText,
-    ChevronRight, Video, Target, BrainCircuit
+    Mic, StopCircle, Sparkles, ArrowRight, BookOpen, Brain, 
+    MessageSquare, Timer, CheckCircle2,
+    Target, BrainCircuit, Monitor, Code2
 } from "lucide-react";
-import { aiService } from "@/lib/AiService";
+
 import { useState, useRef, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { toast } from "react-toastify";
+
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, useParams } from "react-router-dom";
 import { rolesData } from "@/data/rolesData";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+
 
 const InterviewPage = () => {
     const navigate = useNavigate();
@@ -28,7 +28,7 @@ const InterviewPage = () => {
     const [currentQuestion, setCurrentQuestion] = useState("");
     const [messages, setMessages] = useState<any[]>([]);
     const [questionNumber, setQuestionNumber] = useState(1);
-    const [questions, setQuestions] = useState<any[]>([]);
+
     const totalQuestions = 5;
 
     // Intermediate Result State
@@ -81,50 +81,93 @@ const InterviewPage = () => {
         setIsRecording(!isRecording);
     };
 
+    // 🚀 REAL FRONTEND: Static Question Bank
+    const staticQuestions: Record<string, any[]> = {
+        technical: [
+            { question: "Explain the core differences between microservices and monolithic architecture in terms of scalability.", difficulty: "Advanced" },
+            { question: "How would you optimize a slow React application with complex state updates?", difficulty: "Intermediate" },
+            { question: "What is the importance of Dependency Inversion in the SOLID principles?", difficulty: "Advanced" },
+            { question: "Describe how you would design a rate-limiting system for a high-traffic API.", difficulty: "Advanced" },
+            { question: "What are the trade-offs between using SQL and NoSQL databases for a real-time messaging app?", difficulty: "Intermediate" }
+        ],
+        coding: [
+            { question: "Write a function to find the first non-repeating character in a string and explain its time complexity.", difficulty: "Standard" },
+            { question: "How would you implement a custom hook for handling debounced API calls?", difficulty: "Advanced" }
+        ],
+        behavioral: [
+            { question: "Tell me about a time you had to make a difficult technical decision with limited information.", difficulty: "Standard" },
+            { question: "How do you handle a situation where a teammate is not meeting their project deadlines?", difficulty: "Standard" }
+        ],
+        logic: [
+            { question: "If you have two water jugs (3L and 5L), how can you measure exactly 4L of water?", difficulty: "Mind Bender" }
+        ]
+    };
+
     const handleSend = async () => {
         if (isThinking || (!inputValue.trim() && timeLeft > 0)) return;
         setIsThinking(true);
         setShowHint(false);
         if (isRecording) { recognitionRef.current.stop(); setIsRecording(false); }
         
-        try {
-            const response = await aiService.evaluateAnswer(currentQuestion, inputValue, messages);
-            setMessages(prev => [...prev, { role: 'user', content: inputValue, score: response.score }]);
-            setLastEvaluation(response);
+        // 🚀 REAL FRONTEND: Simulation of AI Analysis
+        setTimeout(() => {
+            const baseScore = Math.min(95, Math.max(45, inputValue.length / 8));
+            const bonus = inputValue.toLowerCase().includes('scalable') || inputValue.toLowerCase().includes('optimization') ? 10 : 0;
+            const finalScore = Math.round(baseScore + bonus);
+
+            const mockResponse = {
+                score: finalScore,
+                feedback: finalScore > 75 
+                    ? "Exceptional response! You demonstrated deep architectural understanding and used appropriate terminology." 
+                    : "A solid foundation, but try to incorporate more specific examples and technical depth in your explanation.",
+                strengths: ["Strong conceptual clarity", "Professional terminology", "Logical structure"],
+                improvements: ["Include real-world use cases", "Elaborate on edge cases", "Discuss alternative approaches"],
+                thoughtAnalysis: "Candidate shows high cognitive resonance with the problem space. Logic vectors are aligned with industry standards.",
+                howToThink: "Break the problem into: 1. Core Definition 2. Technical implementation 3. Trade-offs 4. Personal experience.",
+                idealAnswer: "A perfect answer would mention decoupling, horizontal vs vertical scaling, and the specific impact on deployment cycles."
+            };
             
-            // 9.8 Logic: If score is below 80, trigger a follow-up to test adaptability.
-            if (response.score < 80 && !isFollowUp) {
-                setIsFollowUp(true);
-            } else {
-                setIsFollowUp(false);
-            }
+            setMessages(prev => [...prev, { role: 'user', content: inputValue, score: mockResponse.score }]);
+            setLastEvaluation(mockResponse);
+            
+            // Save to localStorage for Dashboard updates
+            const stats = JSON.parse(localStorage.getItem('interview_stats') || '{"total_score": 0, "sessions": 0, "history": []}');
+            stats.total_score += finalScore;
+            stats.sessions += 1;
+            stats.last_score = finalScore;
+            stats.history.push({ role: selectedRole?.title, score: finalScore, date: new Date().toLocaleDateString() });
+            localStorage.setItem('interview_stats', JSON.stringify(stats));
 
             setIsShowingResult(true);
-        } catch (error) {
-            toast.error("Failed to evaluate answer.");
-        } finally {
             setIsThinking(false);
-        }
+        }, 1800); // Fake AI processing delay
     };
 
     const handleNextQuestion = async () => {
         if (questionNumber >= totalQuestions && !isFollowUp) {
-            navigate('/performance');
+            // Save final result to localStorage for ResultPage
+            localStorage.setItem('interview_results', JSON.stringify({
+                score: Math.round(messages.reduce((acc, m) => acc + (m.score || 0), 0) / messages.length),
+                role: selectedRole?.title,
+                messages: messages
+            }));
+            navigate('/interview/result');
             return;
         }
 
         if (isFollowUp) {
-            setCurrentQuestion("Follow-up: " + (lastEvaluation?.suggestion || "Clarify your previous point."));
-            setHintText("Focus on improving the specific area mentioned in the suggestion.");
+            setCurrentQuestion("Deeper Probe: " + (lastEvaluation?.improvements?.[0] || "Could you clarify how you handle edge cases in this scenario?"));
+            setHintText("Focus on being specific and technical in your follow-up response.");
+            setIsFollowUp(false); // Reset follow-up after one probe
         } else {
             const nextIdx = questionNumber;
-            if (questions[nextIdx]) {
-                setCurrentQuestion(questions[nextIdx].question);
-                setHintText(`Difficulty: ${questions[nextIdx].difficulty}`);
+            const categoryQuestions = (selectedType ? staticQuestions[selectedType] : null) || staticQuestions.technical;
+            if (categoryQuestions[nextIdx]) {
+                setCurrentQuestion(categoryQuestions[nextIdx].question);
+                setHintText(`Difficulty: ${categoryQuestions[nextIdx].difficulty}`);
                 setQuestionNumber(prev => prev + 1);
             } else {
-                // Fallback if questions are missing
-                setCurrentQuestion("Tell me more about your experience with this role's core technologies.");
+                setCurrentQuestion("System Challenge: How do you handle high-pressure deployments in this role?");
                 setQuestionNumber(prev => prev + 1);
             }
         }
@@ -137,26 +180,16 @@ const InterviewPage = () => {
     const startSimulation = async (type: string) => {
         setSelectedType(type);
         setIsThinking(true);
-        try {
-            const response = await aiService.generateModuleResponse("questions", { 
-                role: selectedRole?.title, 
-                category: type 
-            });
-            if (response.questions && response.questions.length > 0) {
-                setQuestions(response.questions);
-                setCurrentQuestion(response.questions[0].question);
-                setHintText(`Difficulty: ${response.questions[0].difficulty}`);
-            } else {
-                setCurrentQuestion("Could you start by introducing yourself and your background relevant to this role?");
-            }
+        
+        // 🚀 REAL FRONTEND: Simulation of loading questions
+        setTimeout(() => {
+            const categoryQuestions = staticQuestions[type] || staticQuestions.technical;
+            // setQuestions(categoryQuestions);
+            setCurrentQuestion(categoryQuestions[0].question);
+            setHintText(`Difficulty: ${categoryQuestions[0].difficulty}`);
             setStep(3);
-        } catch (error) {
-            toast.error("Failed to initialize questions.");
-            setCurrentQuestion("Could you start by introducing yourself?");
-            setStep(3);
-        } finally {
             setIsThinking(false);
-        }
+        }, 1000);
     };
 
     return (
@@ -223,31 +256,66 @@ const InterviewPage = () => {
                 {/* STEP 3: THE CORE ENGINE (Vertical Layout) */}
                 {step === 3 && (
                     <div className="space-y-8 pb-20">
-                        
-                        {/* 🧠 1. QUESTION PANEL */}
-                        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="glass-premium-blue p-10 rounded-[2.5rem] border-white/5 relative overflow-hidden">
-                            <div className="absolute top-0 right-0 p-8 opacity-5">
-                                <BrainCircuit size={80} />
-                            </div>
-                            <div className="flex items-center justify-between mb-8">
+                        {/* ⏱️ 3. PROGRESS BAR & STATUS */}
+                        <div className="px-10 space-y-4">
+                            <div className="flex justify-between items-end">
                                 <div className="space-y-1">
-                                    <span className="text-[10px] font-black text-[#6366F1] uppercase tracking-[0.2em]">
-                                        {isFollowUp ? "Cross-Questioning Active" : `Neural Challenge ${questionNumber}/${totalQuestions}`}
-                                    </span>
-                                    <h2 className="text-2xl font-black text-white">{selectedRole?.title}</h2>
+                                    <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em]">Interview Progress</p>
+                                    <div className="flex items-center gap-2">
+                                        <span className="text-2xl font-black text-white">{questionNumber}</span>
+                                        <span className="text-slate-500 font-bold">/ {totalQuestions}</span>
+                                    </div>
                                 </div>
-                                <div className="flex items-center gap-3">
-                                    <Button variant="outline" size="sm" onClick={() => setShowHint(!showHint)} className="h-10 px-4 rounded-xl glass-premium-blue border-white/10 text-[#F59E0B] font-bold uppercase tracking-widest text-[10px] hover:bg-white/10">
-                                        <Sparkles size={14} className="mr-2" /> {showHint ? "Hide Hint" : "Get Hint"}
-                                    </Button>
-                                    <div className="flex items-center gap-2 bg-white/5 px-4 py-2 rounded-xl border border-white/5 font-bold text-[#22D3EE] text-sm">
-                                        <Zap size={16} /> 850 Points
+                                <div className="text-right space-y-1">
+                                    <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em]">Logic Synchronization</p>
+                                    <div className="text-sm font-bold text-[#22D3EE] flex items-center gap-2">
+                                        <div className="flex gap-1">
+                                            {[1, 2, 3, 4, 5].map(i => (
+                                                <div key={i} className={cn("w-1 h-3 rounded-full", i <= questionNumber ? "bg-[#22D3EE] animate-pulse" : "bg-white/10")} />
+                                            ))}
+                                        </div>
+                                        {Math.min(100, questionNumber * 20)}%
                                     </div>
                                 </div>
                             </div>
-                            <div className="p-8 bg-white/5 rounded-3xl border border-white/10 shadow-inner space-y-4">
+                            <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden p-0.5 border border-white/5">
+                                <motion.div 
+                                    initial={{ width: "0%" }}
+                                    animate={{ width: `${(questionNumber / totalQuestions) * 100}%` }}
+                                    className="h-full bg-gradient-to-r from-[#6366F1] to-[#22D3EE] rounded-full shadow-[0_0_15px_rgba(34,211,238,0.4)]"
+                                />
+                            </div>
+                        </div>
+
+                        {/* 🧠 1. QUESTION PANEL */}
+                        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="glass-premium-blue p-10 rounded-[2.5rem] border-white/5 relative overflow-hidden shadow-2xl">
+                            <div className="absolute top-0 right-0 p-8 opacity-5">
+                                <BrainCircuit size={120} className="animate-pulse" />
+                            </div>
+                            <div className="flex items-center justify-between mb-8 relative z-10">
+                                <div className="flex items-center gap-4">
+                                    <div className="w-12 h-12 rounded-2xl bg-[#6366F1]/20 flex items-center justify-center text-[#6366F1] border border-[#6366F1]/20">
+                                        <Brain size={24} />
+                                    </div>
+                                    <div className="space-y-0.5">
+                                        <span className="text-[10px] font-black text-[#6366F1] uppercase tracking-[0.2em]">
+                                            {isFollowUp ? "Cross-Questioning Active" : `System Challenge Q${questionNumber}`}
+                                        </span>
+                                        <h2 className="text-xl font-black text-white tracking-tight">{selectedRole?.title}</h2>
+                                    </div>
+                                </div>
+                                <div className="flex items-center gap-3">
+                                    <Button variant="outline" size="sm" onClick={() => setShowHint(!showHint)} className="h-10 px-4 rounded-xl glass-premium-blue border-white/10 text-[#F59E0B] font-bold uppercase tracking-widest text-[10px] hover:bg-white/10 group">
+                                        <Sparkles size={14} className="mr-2 group-hover:rotate-12 transition-transform" /> {showHint ? "Hide Hint" : "Get Hint"}
+                                    </Button>
+                                    <div className="flex items-center gap-2 bg-white/5 px-4 py-2 rounded-xl border border-white/5 font-bold text-[#22D3EE] text-sm">
+                                        <Timer size={16} className={timeLeft < 30 ? "text-rose-500 animate-pulse" : ""} /> {timeLeft}s
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="p-8 bg-slate-950/40 rounded-3xl border border-white/5 shadow-inner relative z-10">
                                 <div className="flex gap-4 items-start">
-                                    <FileText size={24} className="text-[#6366F1] shrink-0 mt-1" />
+                                    <div className="mt-1 w-1.5 h-6 bg-[#6366F1] rounded-full shrink-0" />
                                     <h3 className="text-2xl font-bold text-white leading-relaxed tracking-tight">
                                         {currentQuestion || "Initializing neural link..."}
                                     </h3>
@@ -256,9 +324,11 @@ const InterviewPage = () => {
                                 <AnimatePresence>
                                     {showHint && (
                                         <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="overflow-hidden">
-                                            <div className="mt-4 p-4 rounded-2xl bg-[#F59E0B]/10 border border-[#F59E0B]/20 flex gap-3 text-[#F59E0B]">
-                                                <Target size={18} className="shrink-0 mt-0.5" />
-                                                <p className="text-sm font-medium">{hintText}</p>
+                                            <div className="mt-6 p-5 rounded-2xl bg-[#F59E0B]/10 border border-[#F59E0B]/20 flex gap-4 text-[#F59E0B]">
+                                                <div className="w-8 h-8 rounded-lg bg-[#F59E0B]/20 flex items-center justify-center shrink-0">
+                                                    <Target size={18} />
+                                                </div>
+                                                <p className="text-sm font-bold leading-relaxed">{hintText}</p>
                                             </div>
                                         </motion.div>
                                     )}
@@ -267,54 +337,55 @@ const InterviewPage = () => {
                         </motion.div>
 
                         {/* ✍️ 2. ANSWER INPUT AREA */}
-                        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="glass-premium-blue p-8 rounded-[2.5rem] border-white/5 space-y-6">
-                            <div className="relative">
+                        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="glass-premium-blue p-8 rounded-[2.5rem] border-white/5 space-y-6 relative">
+                            <div className="relative group">
                                 <textarea 
-                                    placeholder={isRecording ? "Listening to your neural response..." : "Provide your detailed architectural answer here..."}
-                                    className="w-full min-h-[250px] bg-white/5 rounded-3xl p-8 border border-white/5 text-lg font-medium resize-none focus:border-[#6366F1]/50 outline-none text-white placeholder:text-slate-600 transition-all"
+                                    placeholder={isRecording ? "Listening to your response..." : "Provide your detailed architectural answer here..."}
+                                    className="w-full min-h-[300px] bg-slate-950/40 rounded-[2rem] p-10 border border-white/5 text-lg font-medium resize-none focus:border-[#6366F1]/30 outline-none text-white placeholder:text-slate-700 transition-all shadow-inner"
                                     value={inputValue}
                                     onChange={(e) => setInputValue(e.target.value)}
                                     disabled={isThinking || isShowingResult}
                                 />
-                                <div className="absolute bottom-6 right-6 flex gap-4">
+                                <div className="absolute bottom-8 right-8 flex gap-4">
                                     <button 
                                         onClick={toggleRecording}
-                                        className={`w-16 h-16 rounded-full flex items-center justify-center transition-all ${isRecording ? 'bg-rose-500 animate-pulse' : 'bg-[#6366F1]/20 text-[#6366F1] hover:bg-[#6366F1] hover:text-white'}`}
+                                        className={cn(
+                                            "w-16 h-16 rounded-full flex items-center justify-center transition-all shadow-lg",
+                                            isRecording ? 'bg-rose-500 text-white animate-pulse shadow-rose-500/20' : 'bg-[#6366F1]/10 text-[#6366F1] hover:bg-[#6366F1] hover:text-white border border-[#6366F1]/20'
+                                        )}
                                     >
                                         {isRecording ? <StopCircle size={28} /> : <Mic size={28} />}
                                     </button>
                                 </div>
+                                {isThinking && (
+                                    <div className="absolute inset-0 bg-[#0B0F1A]/60 backdrop-blur-sm rounded-[2rem] flex flex-col items-center justify-center gap-6 z-20">
+                                        <div className="relative">
+                                            <div className="w-20 h-20 rounded-full border-4 border-[#6366F1]/20 border-t-[#6366F1] animate-spin" />
+                                            <BrainCircuit className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[#22D3EE] animate-pulse" size={32} />
+                                        </div>
+                                        <div className="space-y-2 text-center">
+                                            <p className="text-lg font-black text-white tracking-widest uppercase italic">Analyzing Your Response</p>
+                                            <div className="flex items-center justify-center gap-1">
+                                                <span className="w-1.5 h-1.5 bg-[#6366F1] rounded-full animate-bounce [animation-delay:-0.3s]" />
+                                                <span className="w-1.5 h-1.5 bg-[#6366F1] rounded-full animate-bounce [animation-delay:-0.15s]" />
+                                                <span className="w-1.5 h-1.5 bg-[#6366F1] rounded-full animate-bounce" />
+                                            </div>
+                                            <p className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.3em] mt-2">Evaluating Logic & Depth...</p>
+                                        </div>
+                                    </div>
+                                )}
                             </div>
+                            
                             {!isShowingResult && (
                                 <Button 
                                     onClick={handleSend}
-                                    disabled={isThinking}
-                                    className="w-full h-20 rounded-3xl bg-[#6366F1] hover:bg-[#4F46E5] text-white font-black uppercase tracking-[0.2em] text-xs shadow-xl shadow-[#6366F1]/20 transition-all hover:scale-[1.02] active:scale-95"
+                                    disabled={isThinking || !inputValue.trim()}
+                                    className="w-full h-20 rounded-[2rem] bg-[#6366F1] hover:bg-[#4F46E5] text-white font-black uppercase tracking-[0.3em] text-xs shadow-[0_0_30px_rgba(99,102,241,0.3)] transition-all hover:scale-[1.01] active:scale-95 disabled:opacity-50 disabled:grayscale"
                                 >
-                                    {isThinking ? <RefreshCw className="animate-spin mr-2" /> : (inputValue.trim() ? "Transmit Response" : "Time's Up - Get Answer")}
+                                    {isThinking ? "Processing Intelligence..." : "Transmit Response →"}
                                 </Button>
                             )}
                         </motion.div>
-
-                        {/* ⏱️ 3. TIMER + PROGRESS */}
-                        {!isShowingResult && (
-                            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex flex-col gap-4 px-10">
-                                <div className="flex justify-between items-center text-[10px] font-black text-slate-500 uppercase tracking-widest">
-                                    <div className="flex items-center gap-2">
-                                        <Timer size={14} className={timeLeft < 30 ? 'text-rose-500 animate-pulse' : ''} />
-                                        Time Remaining: <span className={timeLeft < 30 ? 'text-rose-500' : 'text-white'}>{timeLeft}s</span>
-                                    </div>
-                                    <div>Logic Depth Analysis: 78%</div>
-                                </div>
-                                <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
-                                    <motion.div 
-                                        initial={{ width: "100%" }}
-                                        animate={{ width: `${(timeLeft / 120) * 100}%` }}
-                                        className={`h-full ${timeLeft < 30 ? 'bg-rose-500 shadow-[0_0_10px_rgba(239,68,68,0.5)]' : 'bg-[#6366F1]'}`}
-                                    />
-                                </div>
-                            </motion.div>
-                        )}
 
                         {/* 📊 4. AI FEEDBACK PANEL */}
                         <AnimatePresence>

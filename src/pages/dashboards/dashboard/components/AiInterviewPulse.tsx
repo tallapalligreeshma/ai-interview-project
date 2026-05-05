@@ -1,10 +1,7 @@
 import { useState, useEffect } from "react";
 import { 
-  Zap, 
   Target, 
-  ChevronRight, 
   Sparkles,
-  CheckCircle2,
   AlertCircle,
   Brain,
   Rocket,

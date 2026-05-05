@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { 
     Trophy, Flame, Target, Zap, Shield, Crown, 
-    ChevronRight, ArrowUpCircle, Star, Award
+    Star, Award, CheckCircle2
 } from "lucide-react";
 
 const AchievementsPage = () => {
@@ -140,8 +140,5 @@ const AchievementsPage = () => {
         </div>
     );
 };
-
-// CheckCircle2 needs to be imported or replaced. I'll add it to the import.
-import { CheckCircle2 } from "lucide-react";
 
 export default AchievementsPage;

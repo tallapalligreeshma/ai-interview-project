@@ -1,31 +1,24 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { 
-    Play, 
     Code, 
     Users, 
-    MonitorPlay, 
     Sparkles, 
     TrendingUp, 
-    TrendingDown,
     AlertTriangle,
-    Clock,
-    ChevronRight,
-    BrainCircuit,
     Activity,
     Target,
     Zap,
     Flame,
     Trophy,
     CheckCircle2,
-    RefreshCw,
     Search,
     UserCircle,
     Brain
 } from "lucide-react";
 import ReactApexChart from 'react-apexcharts';
-import type { ApexOptions } from 'apexcharts';
-import { useState, useEffect } from "react";
+
+
 
 const AiDashboard = () => {
     const navigate = useNavigate();
@@ -42,13 +35,13 @@ const AiDashboard = () => {
         }
     };
     
-    const itemVariants = {
+    const itemVariants: any = {
         hidden: { opacity: 0, y: 30 },
         visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
     };
 
     // Chart Data
-    const lineChartOptions: ApexOptions = {
+    const lineChartOptions: any = {
         chart: {
             type: 'line',
             toolbar: { show: false },
@@ -83,7 +76,7 @@ const AiDashboard = () => {
         },
         grid: { borderColor: 'rgba(255,255,255,0.03)', strokeDashArray: 5 },
         theme: { mode: 'dark' },
-        tooltip: { theme: 'dark', y: { formatter: (val) => `${val}%` } }
+        tooltip: { theme: 'dark', y: { formatter: (val: number) => `${val}%` } }
     };
 
     const lineChartSeries = [{
@@ -91,7 +84,7 @@ const AiDashboard = () => {
         data: [62, 65, 72, 70, 78, 85, 88]
     }];
 
-    const radarChartOptions: ApexOptions = {
+    const radarChartOptions: any = {
         chart: { type: 'radar', toolbar: { show: false }, background: 'transparent' },
         stroke: { width: 2, colors: ['#8B5CF6'] },
         fill: { opacity: 0.3, colors: ['#8B5CF6'] },
@@ -129,7 +122,7 @@ const AiDashboard = () => {
                                 </div>
                             </div>
                             <div>
-                                <h1 className="text-3xl font-black text-white tracking-tight">Alex Hunter</h1>
+                                <h1 className="text-3xl font-black text-white tracking-tight">Greeshma Tallapalli</h1>
                                 <p className="text-[#22D3EE] font-black uppercase text-[10px] tracking-widest mt-1">Software Engineer @ AI Training Round</p>
                             </div>
                         </div>

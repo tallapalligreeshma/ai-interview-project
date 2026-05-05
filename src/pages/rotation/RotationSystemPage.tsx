@@ -3,10 +3,8 @@ import {
     RefreshCcw, 
     ArrowRight, 
     Zap, 
-    Target, 
     Users, 
     Code, 
-    Timer,
     Activity,
     ShieldCheck
 } from "lucide-react";

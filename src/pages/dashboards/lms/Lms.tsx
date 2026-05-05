@@ -1,5 +1,5 @@
 import LazyWrapper from "@/components/LazyWrapper";
-import Breadcrumb from "@/layouts/Breadcrumb";
+
 import { lazy } from "react";
 const CourseActivityCard = lazy(() => import("./components/CourseActivityCard"))
 const CoursesCard = lazy(() => import("./components/CoursesCard"))

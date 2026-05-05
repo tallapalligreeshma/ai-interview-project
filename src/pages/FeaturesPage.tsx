@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
     Mic, 
@@ -19,8 +19,6 @@ import {
     Monitor, 
     Target,
     Activity,
-    Bot,
-    UserCheck,
     Cpu,
     ArrowRight
 } from "lucide-react";

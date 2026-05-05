@@ -1,9 +1,9 @@
-import * as React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { motion } from "framer-motion";
 import Breadcrumb from "@/layouts/Breadcrumb";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, BookOpen, Sparkles, Brain, Cpu, ArrowLeft } from "lucide-react";
-import { motion } from "framer-motion";
+import { BookOpen, Sparkles, Brain, Cpu, ArrowLeft, Zap } from "lucide-react";
+
 
 export default function TopicDetail() {
   const { topic } = useParams();

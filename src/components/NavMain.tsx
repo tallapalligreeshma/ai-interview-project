@@ -17,6 +17,7 @@ import { cn } from "@/lib/utils";
 import { ChevronRight } from "lucide-react";
 import { useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
+import { motion } from "framer-motion";
 
 interface SidebarItem {
   title?: string;
@@ -159,13 +160,36 @@ export function NavMain({ items }: { items: SidebarItem[] }) {
                       ? "bg-[#6366F1]/20 text-[#22D3EE] border border-[#6366F1]/20 shadow-[0_0_15px_rgba(99,102,241,0.1)] font-bold" 
                       : "text-slate-400 hover:bg-white/5 hover:text-white"
                   )}
-                  onClick={() => setOpenGroup(null)} // Close all dropdowns
                 >
-                  <Link to={item.url} className="flex items-center gap-2">
+                  <Link 
+                    to={item.url} 
+                    className="flex items-center gap-2 group/link w-full"
+                    onClick={() => {
+                        if (item.title === 'Logout System') {
+                            localStorage.removeItem('token');
+                            localStorage.removeItem('user');
+                        }
+                        setOpenGroup(null);
+                    }}
+                  >
                     {item.icon && (
-                      <item.icon className={cn("!w-4.5 !h-4.5", isMenuActive ? "text-[#22D3EE] drop-shadow-[0_0_5px_rgba(34,211,238,0.5)]" : "")} />
+                      <item.icon className={cn(
+                        "!w-4.5 !h-4.5 transition-transform duration-300 group-hover/link:scale-110 group-hover/link:rotate-6", 
+                        isMenuActive ? "text-[#22D3EE] drop-shadow-[0_0_8px_rgba(34,211,238,0.6)]" : "group-hover/link:text-white"
+                      )} />
                     )}
-                    <span className="font-semibold tracking-tight">{item.title}</span>
+                    <span className={cn(
+                      "font-semibold tracking-tight transition-colors duration-300",
+                      isMenuActive ? "text-[#22D3EE]" : "group-hover/link:text-white"
+                    )}>
+                      {item.title}
+                    </span>
+                    {isMenuActive && (
+                      <motion.div 
+                        layoutId="active-pill"
+                        className="absolute left-0 w-1 h-6 bg-[#22D3EE] rounded-r-full shadow-[0_0_10px_#22D3EE]"
+                      />
+                    )}
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>

@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import Chart from "react-apexcharts";
 import { motion } from "framer-motion";
 import { 
@@ -5,7 +6,6 @@ import {
     Award, 
     Clock, 
     Target, 
-    ArrowUpRight, 
     History,
     Filter,
     Download,
@@ -21,9 +21,9 @@ import { Badge } from "@/components/ui/badge";
 import Breadcrumb from "@/layouts/Breadcrumb";
 import { aiService } from "@/lib/AiService";
 import { useState, useEffect } from "react";
-import { cn } from "@/lib/utils";
 
 const PerformanceDashboard = () => {
+    const navigate = useNavigate();
     // Chart Config: Score Trend
     const lineChartOptions: any = {
         chart: {
@@ -130,7 +130,6 @@ const PerformanceDashboard = () => {
     ];
 
     const [aiAnalysis, setAiAnalysis] = useState<any>(null);
-    const [isLoadingAi, setIsLoadingAi] = useState(true);
 
     useEffect(() => {
         const fetchAiPerformance = async () => {
@@ -142,8 +141,6 @@ const PerformanceDashboard = () => {
                 setAiAnalysis(data);
             } catch (error) {
                 console.error("AI Performance Error:", error);
-            } finally {
-                setIsLoadingAi(false);
             }
         };
         fetchAiPerformance();
